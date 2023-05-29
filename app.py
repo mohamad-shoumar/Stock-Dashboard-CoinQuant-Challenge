@@ -7,16 +7,30 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.offline import plot
 
-
-
 app = Flask(__name__)
+
+
+polygon_key = "AWMbFAPJRt11b4FWamJ8lLBNOPgqf8pI"
+client = RESTClient(polygon_key)
+stockTicker = "AAPL"
+from_date = "2023-05-01"
+to_date = "2023-05-03"
+dataRequest = client.get_aggs(stockTicker, 1, "hour", from_date, to_date)
+print (dataRequest)
+# BASE_URL = "https://api.polygon.io/v2"
+# symbol_list = ["AAPL", "GOOGL", "MSFT", "AMZN", "TSLA"]
+# timeframe = "hour"
+# api_url = f"{BASE_URL}/aggs/grouped/locale/us/market/stocks/tickers/{','.join(symbol_list)}/prev?apiKey=AWMbFAPJRt11b4FWamJ8lLBNOPgqf8pI&unadjusted=true&limit=5000&sort=asc&apiKey=AWMbFAPJRt11b4FWamJ8lLBNOPgqf8pI"
+
+
+
+
+
+
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///stocks.db'
 db = SQLAlchemy(app)
-client = RESTClient(api_key="<API_KEY>")
-BASE_URL = "https://api.polygon.io/v2"
-symbol_list = ["AAPL", "GOOGL", "MSFT", "AMZN", "TSLA"]
-timeframe = "hour"
-api_url = f"{BASE_URL}/aggs/grouped/locale/us/market/stocks/tickers/{','.join(symbol_list)}/prev?apiKey=AWMbFAPJRt11b4FWamJ8lLBNOPgqf8pI&unadjusted=true&limit=5000&sort=asc&apiKey=AWMbFAPJRt11b4FWamJ8lLBNOPgqf8pI"
 
 class Stock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
