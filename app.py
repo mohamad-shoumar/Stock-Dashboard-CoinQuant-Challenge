@@ -9,6 +9,40 @@ from plotly.offline import plot
 import yfinance as yf
 
 app = Flask(__name__)
+app.config['SERVER_NAME'] = 'localhost:5000'  
+app.config['APPLICATION_ROOT'] = '/' 
+app.config['PREFERRED_URL_SCHEME'] = 'http'
+
+tickers = "AAPL MSFT GOOGL AMZN TSLA"
+period = "15d"
+interval = '60m'
+
+data = yf.download(tickers=tickers, period=period, interval=interval, group_by='tickers', auto_adjust=True, prepost=False, threads=True, proxy=None)
+stocks = data
+price_diffs = {} 
+for ticker in tickers.split():
+    data[f'{ticker}_1_hour_diff'] = data[ticker]['Close'].pct_change(periods=1) * 100
+    data[f'{ticker}_4_hours_diff'] = data[ticker]['Close'].pct_change(periods=4) * 100
+    data[f'{ticker}_12_hours_diff'] = data[ticker]['Close'].pct_change(periods=12) * 100
+    data[f'{ticker}_24_hours_diff'] = data[ticker]['Close'].pct_change(periods=24) * 100
+    last_1_hour_diff = data[f'{ticker}_1_hour_diff'].iloc[-1]
+    last_4_hours_diff = data[f'{ticker}_4_hours_diff'].iloc[-1]
+    last_12_hours_diff = data[f'{ticker}_12_hours_diff'].iloc[-1]
+    last_24_hours_diff = data[f'{ticker}_24_hours_diff'].iloc[-1]
+    price_diffs[ticker] = {
+        '1 Hour Diff': last_1_hour_diff,
+        '4 Hours Diff': last_4_hours_diff,
+        '12 Hours Diff': last_12_hours_diff,
+        '24 Hours Diff': last_24_hours_diff,
+       
+    }
+
+# for ticker, diffs in price_diffs.items():
+#     print(f"\nPrice Percentage Differences for {ticker}:")
+#     print("1 Hour Diff:", diffs['1 Hour Diff'])
+#     print("4 Hours Diff:", diffs['4 Hours Diff'])
+#     print("12 Hours Diff:", diffs['12 Hours Diff'])
+#     print("24 Hours Diff:", diffs['24 Hours Diff'])
 
 
 # Database Models
