@@ -18,7 +18,9 @@ period = "15d"
 interval = '60m'
 
 data = yf.download(tickers=tickers, period=period, interval=interval, group_by='tickers', auto_adjust=True, prepost=False, threads=True, proxy=None)
+
 stocks = data
+print(stocks)
 price_diffs = {} 
 for ticker in tickers.split():
     data[f'{ticker}_1_hour_diff'] = data[ticker]['Close'].pct_change(periods=1) * 100
@@ -37,12 +39,12 @@ for ticker in tickers.split():
        
     }
 
-# for ticker, diffs in price_diffs.items():
-#     print(f"\nPrice Percentage Differences for {ticker}:")
-#     print("1 Hour Diff:", diffs['1 Hour Diff'])
-#     print("4 Hours Diff:", diffs['4 Hours Diff'])
-#     print("12 Hours Diff:", diffs['12 Hours Diff'])
-#     print("24 Hours Diff:", diffs['24 Hours Diff'])
+for ticker, diffs in price_diffs.items():
+    print(f"\nPrice Percentage Differences for {ticker}:")
+    print("1 Hour Diff:", diffs['1 Hour Diff'])
+    print("4 Hours Diff:", diffs['4 Hours Diff'])
+    print("12 Hours Diff:", diffs['12 Hours Diff'])
+    print("24 Hours Diff:", diffs['24 Hours Diff'])
 
 
 # Database Models
@@ -83,6 +85,42 @@ class EMA (db.Model):
 
 
 # store price difference and prices in DB
+# store price difference and prices in DB
+# store price difference and prices in DB
+# store price difference and prices in DB
+def populate_tables():
+    for ticker in tickers.split():
+        stock = Stock.query.filter_by(symbol=ticker).first()
+        if not stock:
+            stock = Stock(symbol=ticker)
+            db.session.add(stock)
+
+        for index, row in stocks[ticker].iterrows():
+            timestamp = index.to_pydatetime()
+            price = row['Close']
+
+            # Create StockPrice entry
+            stock_price = StockPrice(timestamp=timestamp, price=price, stock=stock)
+            db.session.add(stock_price)
+
+            # Create PriceChange entry
+            if ticker in price_diffs:
+                diffs = price_diffs[ticker]
+                price_change = PriceChange(timestamp=timestamp,
+                                           hours_1=diffs['1 Hour Diff'],
+                                           hours_4=diffs['4 Hours Diff'],
+                                           hours_12=diffs['12 Hours Diff'],
+                                           hours_24=diffs['24 Hours Diff'],
+                                           stock=stock)
+                db.session.add(price_change)
+
+    db.session.commit()
+
+
+
+
+
+
 # def store_price_data():
 #     with app.app_context():
 #         last_1_hour_diff = priceData['1_hour_diff'].iloc[-1]
@@ -108,6 +146,7 @@ class EMA (db.Model):
 def index():
     # store_price_data()
     # stocks = Stock.query.first() 
+    populate_tables()
     return render_template('index.html')
 
 
@@ -116,4 +155,5 @@ def index():
 if __name__ == '__main__':
     with app.app_context():
         index()
+        db.create_all()
         app.run(debug=True)
