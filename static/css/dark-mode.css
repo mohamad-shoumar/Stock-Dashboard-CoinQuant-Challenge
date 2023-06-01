@@ -1,0 +1,39 @@
+body.dark-mode {
+  background-color: #f5f7f9;
+  color: #4c506b;
+}
+.market-table .table-head {
+  border-block-end: 2px solid black;
+}
+h1.darkmode {
+  color: #142dd1;
+}
+::-webkit-scrollbar.dark-mode {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track.dark-mode {
+  background-color: hsl(0, 0%, 96%);
+}
+
+::-webkit-scrollbar-thumb.dark-mode {
+  background-color: hsl(0, 0%, 82%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(0, 0%, 70%);
+}
+
+/* .market-table .table-body .table-row:is(:hover, :focus-within) {
+  background-color: var(--background);
+}
+.market-table .coin-name:is(:hover, :focus) {
+  color: #5ea6b6;
+}
+.last-update.red {
+  color: var(--danger);
+}
+
+.last-update.green {
+  color: var(--success);
+} */
