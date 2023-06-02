@@ -1,9 +1,13 @@
 {% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
-<h1 style="text-align: center;">Price Pulse</h1>
-<div class="toggle-switch">
-  <input type="checkbox" id="dark-mode-toggle" />
-  <label for="dark-mode-toggle"></label>
+
+<div class="hero">
+    <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" class="logo">
+    <img src="{{ url_for('static', filename='assets/moon.png') }}" alt="moon" id="icon">
 </div>
+
+
+
+
 <div class="container">
     <table class="market-table">
 
@@ -22,11 +26,6 @@
             <th class="table-heading" scope="col">12h %</th>
             <th class="table-heading" scope="col">24h %</th>
             <th class="table-heading" scope="col">Stock price vs EMA</th>
-
-            
-
-            
-
             <th class="table-heading"></th>
 
           </tr>
@@ -80,20 +79,13 @@
                 </h3>
               </div>
             </td>
-
             <td class="table-data last-price">$56,623.54</td>
             <td class="table-data market-cap">$880,423,640,582</td>
-
             <td class="table-data last-update red">-5.12%</td>
             <td class="table-data last-update red">-5.12%</td>
             <td class="table-data last-update red">-5.12%</td>
             <td class="table-data last-update red">-5.12%</td>
             <td class="table-data last-update red">↓ 1h ,↑ 4h, ↓ 12h, ↑ 1d </td>
-
-
-
-          
-
           </tr>
 
           <tr class="table-row">
