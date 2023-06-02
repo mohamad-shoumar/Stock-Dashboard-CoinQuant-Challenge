@@ -1,16 +1,17 @@
-body {
-  background-color: #f0f0f0;
-  color: #333;
+.hero {
+  padding: 2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-h1 {
-  color: #333;
+#icon {
+  width: 30px;
+  cursor: pointer;
 }
-
 :root {
   /* Color palete */
   --cadet-blue-crayola: hsl(227, 13%, 73%);
-
   --medium-sea-green: hsl(142, 43%, 54%);
   --blue-crayola_10: hsla(222, 100%, 61%, 0.05);
   --eerie-black-1: hsl(240, 5%, 8%);
@@ -19,19 +20,9 @@ h1 {
   --blue-crayola: hsl(222, 100%, 61%);
   --roman-silver: hsl(223, 10%, 52%);
   --presian-red: hsl(0, 64%, 52%);
-
   --white: hsl(0, 0%, 100%);
-
-  --background: #f5f7f9;
-  --card: #ffffff;
-  --success: #054113;
-  --danger: #230306;
-  --text: #4c506b;
-  --subtext: #a9acbb;
-
   /* Typography */
   --ff-dm-sans: "DM Sans", sans-serif;
-
   --fs-1: 3.2rem;
   --fs-2: 3rem;
   --fs-3: 2.4rem;
@@ -42,6 +33,19 @@ h1 {
   --fs-8: 1.2rem;
   --fw-500: 500;
   --fw-700: 700;
+}
+
+.dark-theme {
+  --cadet-blue-crayola: hsl(0, 1%, 34%);
+  --medium-sea-green: hsl(142, 52%, 32%);
+  --blue-crayola_10: hsla(222, 100%, 61%, 0.05);
+  --eerie-black-1: hsl(240, 5%, 92%);
+  --eerie-black-2: hsl(228, 9%, 90%);
+  --raisin-black: hsl(225, 15%, 84%);
+  --blue-crayola: hsl(323, 100%, 50%);
+  --roman-silver: hsl(223, 10%, 48%);
+  --presian-red: hsl(0, 100%, 31%);
+  --white: hsl(0, 0%, 0%);
 }
 *,
 a {
