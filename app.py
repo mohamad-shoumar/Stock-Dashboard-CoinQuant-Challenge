@@ -52,8 +52,6 @@ for ticker in tickers.split():
         ema = stock_prices.ewm(span=period, adjust=False).mean()
         ema_values.setdefault(ticker, {})[f'{period}_Hours_EMA'] = ema.iloc[-1]
 
-print(price_diffs)
-print(ema_values)
 
 
 # Database Models
@@ -93,15 +91,36 @@ class EMA (db.Model):
     hours_4 = db.Column(db.Float)
     hours_12 = db.Column(db.Float)
     hours_24 = db.Column(db.Float)
-  
-
-print(data.columns)
 
 
+def populate_tables(data, stock_info):
+    for timestamp, row in data.iterrows():
+        for ticker in tickers.split():
+            stock_data = stock_info[ticker]
+
+            stock = Stock.query.filter_by(symbol=ticker).first()
+            if not stock:
+                stock = Stock(
+                    icon='',
+                    symbol=ticker,
+                    name=stock_data['Name'],
+                    marketcap=stock_data['MarketCap']
+                )
+                db.session.add(stock)
+
+            existing_stock_price = StockPrice.query.filter_by(timestamp=timestamp, stock=stock).first()
+            if existing_stock_price:
+                existing_stock_price.price = row['Close'][ticker]
+            else:
+                stock_price = StockPrice(timestamp=timestamp, price=row['Close'][ticker], stock=stock)
+                db.session.add(stock_price)
+
+    db.session.commit()
 
 # route 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    populate_tables(data, stock_info)
     return render_template('index.html')
 
 
@@ -110,4 +129,5 @@ def index():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        populate_tables(data, stock_info)
         app.run(debug=True)
