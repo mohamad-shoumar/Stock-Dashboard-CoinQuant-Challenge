@@ -1,14 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const toggleSwitch = document.querySelector("#dark-mode-toggle");
-  const darkModeStyle = document.querySelector("#dark-mode-style");
-
-  toggleSwitch.addEventListener("change", function () {
-    if (this.checked) {
-      document.body.classList.add("dark-mode");
-      darkModeStyle.disabled = false;
+  const icon = document.getElementById("icon");
+  icon.onclick = function () {
+    document.body.classList.toggle("dark-theme");
+    if (document.body.classList.contains("dark-theme")) {
+      icon.src = "static/assets/moon.png";
     } else {
-      document.body.classList.remove("dark-mode");
-      darkModeStyle.disabled = true;
+      icon.src = "static/assets/sun.png";
     }
-  });
+  };
 });
