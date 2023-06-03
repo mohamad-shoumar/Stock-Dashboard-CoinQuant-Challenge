@@ -86,6 +86,26 @@ for ticker in tickers.split():
         ema_values.setdefault(ticker, {})[f'{period}_Hours_200EMA'] = ema.dropna().tolist()
 
 
+price_diff_df = pd.DataFrame(columns=['Ticker', 'Period', 'Timestamp', 'Value'])
+for ticker in price_diffs:
+    for period in price_diffs[ticker]:
+        for i, value in enumerate(price_diffs[ticker][period]):
+            timestamp = df.index[i]  # Assuming timestamps are the indices of your original DataFrame
+            price_diff_df = pd.concat([price_diff_df, pd.DataFrame({'Ticker': ticker, 'Period': period, 'Timestamp': timestamp, 'Value': value}, index=[0])], ignore_index=True)
+
+ema_df = pd.DataFrame(columns=['Ticker', 'Period', 'Timestamp', 'Value'])
+for ticker in ema_values:
+    for period in ema_values[ticker]:
+        for i, value in enumerate(ema_values[ticker][period]):
+            timestamp = df.index[i]  # Assuming timestamps are the indices of your original DataFrame
+            ema_df = pd.concat([ema_df, pd.DataFrame({'Ticker': ticker, 'Period': period, 'Timestamp': timestamp, 'Value': value}, index=[0])], ignore_index=True)
+
+
+print("price_diffs_df:")
+print(price_diff_df)
+
+print("\nema_values_df:")
+print(ema_df)
 
 
 
