@@ -149,6 +149,59 @@ def populate_emas_table(ema_df):
         db.session.add(new_ema)
         db.session.commit()
 
+def populate_stocks_table(df):
+    for ticker in df.columns:
+        existing_stock = Stock.query.filter_by(symbol=ticker).first()
+
+        if existing_stock:
+            continue 
+        latest_data = df[ticker].iloc[-1]
+
+        stock = yf.Ticker(ticker)
+
+        new_stock = Stock(
+            icon=None,  
+            symbol=ticker,
+            name=stock.info.get('longName'),
+            marketcap=stock.info.get('marketCap'),
+        )
+        db.session.add(new_stock)
+        db.session.commit()
+
+
+def populate_stock_prices_table(df):
+    for ticker in df.columns:
+        stock_id = stock_id_from_ticker(ticker)
+
+        for timestamp, price in df[ticker].items():
+            existing_stock_price = StockPrice.query.filter_by(
+                timestamp=timestamp,
+                stock_id=stock_id,
+                price=price
+            ).first()
+
+            if existing_stock_price:
+                continue 
+            new_stock_price = StockPrice(
+                timestamp=timestamp,
+                stock_id=stock_id,
+                price=price,
+            )
+            db.session.add(new_stock_price)
+            db.session.commit()
+
+
+
+
+
+def stock_id_from_ticker(ticker):
+    stock = Stock.query.filter_by(symbol=ticker).first()
+    return stock.id if stock else None
+
+
+
+
+
 # route 
 @app.route('/', methods=['GET', 'POST'])
 def index():
