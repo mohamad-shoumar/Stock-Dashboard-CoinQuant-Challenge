@@ -107,6 +107,26 @@ print(price_diff_df)
 print("\nema_values_df:")
 print(ema_df)
 
+def populate_price_changes_table(price_diff_df):
+    for _, row in price_diff_df.iterrows():
+        stock_id = stock_id_from_ticker(row['Ticker'])
+        existing_price_change = PriceChange.query.filter_by(
+            stock_id=stock_id,
+            timestamp=row['Timestamp'],
+            period=int(row['Period'].split('_')[0])
+        ).first()
+
+        if existing_price_change:
+            continue
+        new_price_change = PriceChange(
+            stock_id=stock_id,
+            timestamp=row['Timestamp'],
+            period=int(row['Period'].split('_')[0]),
+            price_change=row['Value'],
+        )
+
+        db.session.add(new_price_change)
+        db.session.commit()
 
 
 
