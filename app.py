@@ -128,7 +128,26 @@ def populate_price_changes_table(price_diff_df):
         db.session.add(new_price_change)
         db.session.commit()
 
+def populate_emas_table(ema_df):
+    for _, row in ema_df.iterrows():
+        stock_id = stock_id_from_ticker(row['Ticker'])
+        existing_ema = EMA.query.filter_by(
+            stock_id=stock_id,
+            timestamp=row['Timestamp'],
+            period=int(row['Period'].split('_')[0])
+        ).first()
 
+        if existing_ema:
+            continue
+        new_ema = EMA(
+            stock_id=stock_id,
+            timestamp=row['Timestamp'],
+            period=int(row['Period'].split('_')[0]),
+            ema=row['Value'],
+        )
+
+        db.session.add(new_ema)
+        db.session.commit()
 
 # route 
 @app.route('/', methods=['GET', 'POST'])
