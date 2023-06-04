@@ -26,7 +26,7 @@
 
 > |     | ER Diagram                     | Mockup                            |
 > | --- | ------------------------------ | --------------------------------- |
-> |     | ![fsdaf](./readme/demo/er.png) | ![fsdaf](./readme/demo/figma.svg) |
+> |     | ![fsdaf](./readme/demo/er.png) | ![fsdaf](./readme/demo/figma.png) |
 
 ### Implementation
 
