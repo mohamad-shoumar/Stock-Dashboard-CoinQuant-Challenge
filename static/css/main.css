@@ -237,3 +237,16 @@ body.active {
 .last-update.green {
   color: var(--medium-sea-green);
 }
+.red {
+  color: var(--presian-red);
+}
+
+.green {
+  color: var(--medium-sea-green);
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
