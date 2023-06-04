@@ -5,18 +5,11 @@
     <img src="{{ url_for('static', filename='assets/moon.png') }}" alt="moon" id="icon">
 </div>
 
-
-
-
 <div class="container">
     <table class="market-table">
-
         <thead class="table-head">
-
           <tr class="table-row table-title">
-
             <th class="table-heading"></th>
-
             <th class="table-heading" scope="col">#</th>
             <th class="table-heading" scope="col">Name</th>
             <th class="table-heading" scope="col">Last Price</th>
@@ -26,168 +19,36 @@
             <th class="table-heading" scope="col">12h %</th>
             <th class="table-heading" scope="col">24h %</th>
             <th class="table-heading" scope="col">Stock price vs EMA</th>
-            <th class="table-heading"></th>
-
           </tr>
-
         </thead>
-
-        <tbody class="table-body">
-
-          <tr class="table-row">
-
-            <td class="table-data">
-              
-            </td>
-
-            <th class="table-data rank" scope="row">1</th>
-
-            <td class="table-data">
-              <div class="wrapper">
-                <img src="./assets/images/stock-1.svg" width="20" height="20" alt="Bitstock logo" class="img">
-
+<tbody class="table-body">
+    {% for stock in stocks %}
+    <tr class="table-row">
+        <td class="table-data"></td>
+        <th class="table-data rank" scope="row">{{ loop.index }}</th>
+        <td class="table-data">
+            <div class="wrapper">
+                <img src="{{ url_for('static', filename='assets/' + stock.icon) }}" width="20" height="20" alt="stock logo" class="img">
                 <h3>
-                  <a href="#" class="stock-name">Apple <span class="span">AAPL</span></a>
+                    <a href="#" class="stock-name">{{ stock.name }} <span class="span">{{ stock.symbol }}</span></a>
                 </h3>
-              </div>
-            </td>
-
-            <td class="table-data last-price">$56,623.54</td>
-            <td class="table-data market-cap">$880,423,640,582</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">↓ 1h ,↑ 4h, ↓ 12h, ↑ 1d, </td>
-
-          </tr>
-
-          <tr class="table-row">
-
-            <td class="table-data">
-              
-            </td>
-
-            <th class="table-data rank" scope="row">2</th>
-
-            <td class="table-data">
-              <div class="wrapper">
-                <img src="./assets/images/stock-2.svg" width="20" height="20" alt="Ethereum logo" class="img">
-
-                <h3>
-                  <a href="#" class="stock-name">Microsoft <span class="span">MSFT</span></a>
-                </h3>
-              </div>
-            </td>
-            <td class="table-data last-price">$56,623.54</td>
-            <td class="table-data market-cap">$880,423,640,582</td>
-            <td class="table-data last-update red">-5.12%</td>
-            <td class="table-data last-update red">-5.12%</td>
-            <td class="table-data last-update red">-5.12%</td>
-            <td class="table-data last-update red">-5.12%</td>
-            <td class="table-data last-update red">↓ 1h ,↑ 4h, ↓ 12h, ↑ 1d </td>
-          </tr>
-
-          <tr class="table-row">
-
-            <td class="table-data">
-              
-            </td>
-
-            <th class="table-data rank" scope="row">3</th>
-
-            <td class="table-data">
-              <div class="wrapper">
-                <img src="./assets/images/stock-3.svg" width="20" height="20" alt="Tether logo" class="img">
-
-                <h3>
-                  <a href="#" class="stock-name">Google <span class="span">GOOGL</span></a>
-                </h3>
-              </div>
-            </td>
-
-            <td class="table-data last-price">$56,623.54</td>
-            <td class="table-data market-cap">$880,423,640,582</td>
-
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data market-cap">↓ 1h ,↑ 4h, ↓ 12h, ↑ 1d</td>
-
-         
-
-           
-
-          
-
-          </tr>
-
-          <tr class="table-row">
-
-            <td class="table-data">
-              
-            </td>
-
-            <th class="table-data rank" scope="row">4</th>
-
-            <td class="table-data">
-              <div class="wrapper">
-                <img src="./assets/images/stock-4.svg" width="20" height="20" alt="BNB logo" class="img">
-
-                <h3>
-                  <a href="#" class="stock-name">Amazon <span class="span">AMZN</span></a>
-                </h3>
-              </div>
-            </td>
-
-            <td class="table-data last-price">$56,623.54</td>
-            <td class="table-data market-cap">$880,423,640,582</td>
-
-            <td class="table-data last-update red">-3.75%%</td>
-            <td class="table-data last-update red">-3.75%%</td>
-            <td class="table-data last-update red">-3.75%%</td>
-            <td class="table-data last-update red">-3.75%%</td>
-            <td class="table-data last-price">↓ 1h ,↑ 4h, ↓ 12h, ↑ 1d</td>
-
-           
-
-          
-
-          </tr>
-
-          <tr class="table-row">
-
-            <td class="table-data">
-              
-            </td>
-
-            <th class="table-data rank" scope="row">5</th>
-
-            <td class="table-data">
-              <div class="wrapper">
-                <img src="./assets/images/stock-5.svg" width="20" height="20" alt="Solana logo" class="img">
-
-                <h3>
-                  <a href="#" class="stock-name">Tesla <span class="span">TSLA</span></a>
-                </h3>
-              </div>
-            </td>
-
-            <td class="table-data last-price">$56,623.54</td>
-            
-            <td class="table-data market-cap">$880,423,640,582</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-            <td class="table-data last-update green">+1.45%</td>
-          </tr>
-
-          
-
-          </tr>
-
-        </tbody>
+            </div>
+        </td>
+        <td class="table-data last-price">{{ stock.stock_prices[-1].price }}</td>  
+        <td class="table-data market-cap">{{ stock.marketcap }}</td>
+        {% for price_diff in stock.price_changes %}
+        <td class="table-data last-update {% if price_diff.price_diff >= 0 %}green{% else %}red{% endif %}">{{ price_diff.price_diff }}%</td>
+        {% endfor %}
+        <td class="table-data last-update flex">
+          {% for ema in stock.emas %} 
+              <span class="{% if stock.stock_prices[-1].price >= ema.emas %}green{% else %}red{% endif %}">
+                  {{ '↑' if stock.stock_prices[-1].price >= ema.emas else '↓' }} {{ ema.period }}h
+              </span>
+          {% endfor %}
+          </td>       
+    </tr>
+    {% endfor %}
+</tbody>
 
       </table>
 
