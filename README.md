@@ -24,21 +24,23 @@
 
 ### ER daigram and Mockup
 
-> |     | ER Diagram                                   | Mockup                            |
-> | --- | -------------------------------------------- | --------------------------------- |
-> |     | ![fsdaf](./readme/demo/ViewPatientFigma.png) | ![fsdaf](./readme/demo/figma.svg) |
+> |     | ER Diagram                     | Mockup                            |
+> | --- | ------------------------------ | --------------------------------- |
+> |     | ![fsdaf](./readme/demo/er.png) | ![fsdaf](./readme/demo/figma.svg) |
 
 ### Implementation
 
-> | Demo                                                    |
-> | ------------------------------------------------------- |
-> | <img src="./readme/gifs/landing2gif.gif" width="100%"/> |
+> |     | Dark Mode                            | Light Mode                            |
+> | --- | ------------------------------------ | ------------------------------------- |
+> |     | ![fsdaf](./readme/demo/darkmode.png) | ![fsdaf](./readme/demo/lightmode.png) |
 
 <img src="./readme/title5.svg"/>
 ### PricePulse is built using the following technologies:
 
 -Flask: A Python web framework used for backend development.
+
 -SQLite: A lightweight and portable database management system suitable for small to meduim projects
+
 -CSS: Used for styling and enhancing the user interface.
 
 <!-- How to run -->
